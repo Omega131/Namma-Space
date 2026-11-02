@@ -1,0 +1,198 @@
+{
+  "source_video": "sample_indoor_walkthrough.mp4",
+  "total_frames_extracted": 19,
+  "rejected_blurry": 0,
+  "rejected_static": 11,
+  "frames": [
+    {
+      "file": "frame_00000.jpg",
+      "frame_index": 0,
+      "timestamp_sec": 0.0,
+      "blur_score": 395.31,
+      "resolution": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "frame_00001.jpg",
+      "frame_index": 15,
+      "timestamp_sec": 0.5,
+      "blur_score": 405.87,
+      "resolution": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "frame_00002.jpg",
+      "frame_index": 30,
+      "timestamp_sec": 1.0,
+      "blur_score": 411.61,
+      "resolution": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "frame_00003.jpg",
+      "frame_index": 60,
+      "timestamp_sec": 2.0,
+      "blur_score": 414.83,
+      "resolution": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "frame_00004.jpg",
+      "frame_index": 90,
+      "timestamp_sec": 3.0,
+      "blur_score": 403.09,
+      "resolution": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "frame_00005.jpg",
+      "frame_index": 105,
+      "timestamp_sec": 3.5,
+      "blur_score": 387.69,
+      "resolution": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "frame_00006.jpg",
+      "frame_index": 120,
+      "timestamp_sec": 4.0,
+      "blur_score": 394.17,
+      "resolution": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "frame_00007.jpg",
+      "frame_index": 135,
+      "timestamp_sec": 4.5,
+      "blur_score": 388.78,
+      "resolution": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "frame_00008.jpg",
+      "frame_index": 165,
+      "timestamp_sec": 5.5,
+      "blur_score": 386.09,
+      "resolution": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "frame_00009.jpg",
+      "frame_index": 195,
+      "timestamp_sec": 6.5,
+      "blur_score": 402.34,
+      "resolution": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "frame_00010.jpg",
+      "frame_index": 225,
+      "timestamp_sec": 7.5,
+      "blur_score": 394.21,
+      "resolution": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "frame_00011.jpg",
+      "frame_index": 255,
+      "timestamp_sec": 8.5,
+      "blur_score": 399.57,
+      "resolution": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "frame_00012.jpg",
+      "frame_index": 270,
+      "timestamp_sec": 9.0,
+      "blur_score": 397.22,
+      "resolution": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "frame_00013.jpg",
+      "frame_index": 300,
+      "timestamp_sec": 10.0,
+      "blur_score": 407.8,
+      "resolution": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "frame_00014.jpg",
+      "frame_index": 330,
+      "timestamp_sec": 11.0,
+      "blur_score": 396.26,
+      "resolution": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "frame_00015.jpg",
+      "frame_index": 360,
+      "timestamp_sec": 12.0,
+      "blur_score": 406.2,
+      "resolution": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "frame_00016.jpg",
+      "frame_index": 375,
+      "timestamp_sec": 12.5,
+      "blur_score": 400.48,
+      "resolution": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "frame_00017.jpg",
+      "frame_index": 405,
+      "timestamp_sec": 13.5,
+      "blur_score": 400.16,
+      "resolution": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "frame_00018.jpg",
+      "frame_index": 435,
+      "timestamp_sec": 14.5,
+      "blur_score": 399.71,
+      "resolution": [
+        1280,
+        720
+      ]
+    }
+  ]
+}

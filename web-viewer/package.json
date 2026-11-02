@@ -1,0 +1,19 @@
+{
+  "name": "namma-space-web-viewer",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Zero-install first-person 3D spatial web viewer for Namma Space (Techfest 2026-27)",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "three": "^0.170.0"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0"
+  }
+}
+

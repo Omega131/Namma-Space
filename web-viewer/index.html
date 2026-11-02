@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Namma Space - 3D Indoor Digital Twin & Spatial Navigation</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+
+<body>
+  <!-- 3D Canvas Container -->
+  <div id="canvas-container"></div>
+
+  <!-- Reticle / Crosshair -->
+  <div id="crosshair"></div>
+
+  <!-- Top Navigation Header -->
+  <header id="top-nav">
+    <div class="brand">
+      <div class="logo-badge">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="2 17 12 22 22 17"></polyline>
+          <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+      </div>
+      <div class="title-wrap">
+        <h1 class="brand-title">Namma Space</h1>
+        <span class="brand-subtitle">Techfest IIT Bombay • Spatial Digital Twin Engine</span>
+      </div>
+    </div>
+
+    <div class="header-center">
+      <div id="view-mode-selector" class="pill-group">
+        <button id="btn-mode-fps" class="pill-btn active" title="First-Person Walkthrough (WASD)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="7" r="4"></circle>
+            <path d="M5.5 21v-2a6.5 6.5 0 0 1 13 0v2"></path>
+          </svg>
+          Walk (FPS)
+        </button>
+        <button id="btn-mode-tour" class="pill-btn" title="Automated Video Walkthrough Tour">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          Demo Tour (Video)
+        </button>
+        <button id="btn-mode-orbit" class="pill-btn" title="Overhead Dollhouse / Orbit View">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path
+              d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+            </path>
+          </svg>
+          Dollhouse (Orbit)
+        </button>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <!-- High-visibility Upload & Tutorial Button -->
+      <button id="btn-upload-tutorial" class="action-btn-highlight" title="Upload Resources & Capture Tutorial">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="17 8 12 3 7 8"></polyline>
+          <line x1="12" y1="3" x2="12" y2="15"></line>
+        </svg>
+        <span>Upload & Tutorial</span>
+      </button>
+
+      <div class="stat-badge" id="fps-counter">60 FPS</div>
+      <button id="btn-help-toggle" class="icon-btn" title="Controls & Help">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+      </button>
+      <button id="btn-fullscreen" class="icon-btn" title="Toggle Fullscreen">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3">
+          </path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Minimap Radar HUD -->
+  <div id="minimap-panel" class="hud-card">
+    <div class="minimap-header">
+      <span class="minimap-title">FLOOR RADAR</span>
+      <span id="player-coords">X: 0.0 | Z: 0.0</span>
+    </div>
+    <div class="minimap-container">
+      <canvas id="minimap-canvas" width="180" height="180"></canvas>
+      <div id="minimap-compass">N</div>
+    </div>
+  </div>
+
+  <!-- Controls Reminder Bottom Left -->
+  <div id="controls-quicktip" class="hud-card">
+    <div class="key-hints">
+      <span class="key-badge">W</span> Forward
+      <span class="key-badge">S</span> Backward
+      <span class="key-badge">A</span> Left
+      <span class="key-badge">D</span> Right
+      <span class="key-badge">SHIFT</span> Sprint
+      <span class="key-badge">V</span> View Mode
+    </div>
+  </div>
+
+  <!-- Click-to-Enter Overlay (Pointer Lock Prompt) -->
+  <div id="blocker">
+    <div id="instructions">
+      <div class="instructions-card">
+        <div class="pulse-ring"></div>
+        <h2>Click to Enter Walkthrough</h2>
+        <p class="subtitle">Explore the high-fidelity 3D indoor digital twin</p>
+        <div class="grid-controls">
+          <div class="control-row"><span class="key">W</span><span>Walk Forward</span></div>
+          <div class="control-row"><span class="key">S</span><span>Walk Backward</span></div>
+          <div class="control-row"><span class="key">A / D</span><span>Strafe Left / Right</span></div>
+          <div class="control-row"><span class="key">MOUSE</span><span>Look around & aim</span></div>
+          <div class="control-row"><span class="key">SHIFT</span><span>Sprint</span></div>
+          <div class="control-row"><span class="key">SPACE</span><span>Jump</span></div>
+          <div class="control-row"><span class="key">V</span><span>Toggle Top-Down / Orbit view</span></div>
+          <div class="control-row"><span class="key">ESC</span><span>Release mouse cursor</span></div>
+        </div>
+        <div class="instructions-actions">
+          <button id="btn-start-walk" class="btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5.5 21v-2a6.5 6.5 0 0 1 13 0v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            Free Walk (WASD)
+          </button>
+          <button id="btn-start-tour" class="btn-primary"
+            style="background: linear-gradient(135deg, #0284c7, #2563eb);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            Play Demo Tour
+          </button>
+          <button id="btn-open-studio-card" class="btn-secondary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+            Upload & Tutorial
+          </button>
+        </div>
+        <p class="drag-hint">Or click <strong>"Upload & Tutorial"</strong> anytime to import your custom models!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tour Banner HUD -->
+  <div id="tour-hud" class="hud-card hidden">
+    <div class="tour-left">
+      <div class="pulse-dot"></div>
+      <span class="tour-badge">DEMO TOUR</span>
+      <span id="tour-zone-name">Welcome Reception & Foyer</span>
+    </div>
+    <div class="tour-right">
+      <button id="btn-tour-pause" class="tour-action-btn">Pause</button>
+      <button id="btn-tour-exit" class="tour-action-btn exit">Exit to Free Walk</button>
+    </div>
+  </div>
+
+  <!-- Upload & Tutorial Studio Modal -->
+  <div id="upload-tutorial-modal" class="modal hidden">
+    <div class="modal-card studio-modal-card">
+      <div class="modal-header">
+        <div class="tab-buttons">
+          <button id="tab-btn-upload" class="tab-btn active">📤 Upload Resources</button>
+          <button id="tab-btn-tutorial" class="tab-btn">🎓 Capture SOP Tutorial</button>
+        </div>
+        <button id="btn-close-studio" class="close-btn">&times;</button>
+      </div>
+
+      <!-- Tab 1: Upload Resources -->
+      <div id="tab-content-upload" class="tab-content">
+        <div class="upload-dropzone" id="modal-dropzone">
+          <div class="upload-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+          </div>
+          <h4>Drop your 3D Digital Twin (.glb/.gltf) or Smartphone Video (.mp4)</h4>
+          <p class="dropzone-sub">Upload <strong>.glb / .gltf</strong> for instant 3D rendering in the browser, or
+            <strong>.mp4 / .mov</strong> to run the automated reconstruction pipeline.</p>
+          <label class="btn-primary" style="margin-top: 14px; cursor: pointer;">
+            Browse Files
+            <input type="file" id="studio-file-input" accept=".glb,.gltf,.mp4,.mov" style="display: none;">
+          </label>
+        </div>
+
+        <div class="pipeline-progress-box hidden" id="pipeline-progress-box">
+          <div class="pipeline-steps">
+            <div class="step-badge active" id="pstep-1">1. Ingestion</div>
+            <div class="step-line"></div>
+            <div class="step-badge" id="pstep-2">2. Blur Filter</div>
+            <div class="step-line"></div>
+            <div class="step-badge" id="pstep-3">3. SfM Poses</div>
+            <div class="step-line"></div>
+            <div class="step-badge" id="pstep-4">4. 3D Twin Ready</div>
+          </div>
+          <div class="progress-bar-wrap">
+            <div id="studio-progress-bar" style="width: 25%;"></div>
+          </div>
+          <p id="pipeline-status-text" style="font-size: 12.5px; color: #38bdf8; text-align: center; margin-top: 10px;">
+            Parsing uploaded model geometry...</p>
+        </div>
+      </div>
+
+      <!-- Tab 2: SOP Capture Tutorial -->
+      <div id="tab-content-tutorial" class="tab-content hidden">
+        <div class="tutorial-carousel">
+          <div class="tutorial-card">
+            <div class="step-number">STEP 1</div>
+            <h4>Camera Setup & Sensor Locking</h4>
+            <p>Set smartphone camera to <strong>4K @ 60 FPS</strong>. Long-press on a neutral surface to activate
+              <strong>AE/AF Lock</strong> at ~2 meters. Fixed exposure and focus prevent photogrammetric gradient
+              instability.</p>
+          </div>
+          <div class="tutorial-card">
+            <div class="step-number">STEP 2</div>
+            <h4>Perimeter Loop Walk (Eye Level: 1.6m)</h4>
+            <p>Walk a closed clockwise loop around the room perimeter at <strong>0.5 m/s</strong> (1 step every 1.5s),
+              ensuring <strong>75%+ overlap</strong> between consecutive video frames. Pan smoothly across corners.</p>
+          </div>
+          <div class="tutorial-card">
+            <div class="step-number">STEP 3</div>
+            <h4>Inward Cross & POI Orbits</h4>
+            <p>Perform an internal Figure-8 cross pattern through the center. Perform a 360-degree orbit around key
+              obstacles (meeting tables, desks, lounge sofas) to provide multi-angle parallax.</p>
+          </div>
+          <div class="tutorial-card">
+            <div class="step-number">STEP 4</div>
+            <h4>Low-Angle Floor Pass (35° Downward)</h4>
+            <p>Tilt camera downward at 35 degrees and walk the corridors at waist level. This captures clear
+              floor-to-wall boundaries for collision detection and navigation mesh generation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Help & SOP Info Modal -->
+  <div id="help-modal" class="modal hidden">
+    <div class="modal-card help-card">
+      <div class="modal-header">
+        <h3>About Namma Space & Capture SOP</h3>
+        <button id="btn-close-help" class="close-btn">&times;</button>
+      </div>
+      <div class="help-content">
+        <h4>System Architecture</h4>
+        <p>Built for <strong>Techfest 2026-27 (IIT Bombay)</strong>. Converts ordinary consumer smartphone captures into
+          an interactive 3D digital twin with zero-install WebGL locomotion.</p>
+
+        <h4>Navigation Controls</h4>
+        <p>Use standard PC controls: <code>W</code> = Forward, <code>S</code> = Backward, <code>A</code> = Left,
+          <code>D</code> = Right, <code>Shift</code> = Sprint, <code>Space</code> = Jump. Press <code>V</code> to toggle
+          between First Person and Orbit Dollhouse view.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div class="loader-content">
+      <div class="spinner"></div>
+      <h2 id="loading-text">Constructing 3D Spatial Digital Twin...</h2>
+      <p id="loading-subtext">Initializing WebGL render engine, textures, and collision meshes</p>
+      <div class="progress-bar-wrap">
+        <div id="progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

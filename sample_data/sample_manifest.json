@@ -1,0 +1,114 @@
+[
+  {
+    "filename": "frame_0000.jpg",
+    "scene_zone": "Reception Lobby",
+    "frame_idx": 0,
+    "simulated_fov": 75.0,
+    "sharpness_score": 142.5
+  },
+  {
+    "filename": "frame_0001.jpg",
+    "scene_zone": "Reception Desk Counter",
+    "frame_idx": 1,
+    "simulated_fov": 75.0,
+    "sharpness_score": 145.7
+  },
+  {
+    "filename": "frame_0002.jpg",
+    "scene_zone": "Main Corridor Entrance",
+    "frame_idx": 2,
+    "simulated_fov": 75.0,
+    "sharpness_score": 148.9
+  },
+  {
+    "filename": "frame_0003.jpg",
+    "scene_zone": "Executive Lounge Corner",
+    "frame_idx": 3,
+    "simulated_fov": 75.0,
+    "sharpness_score": 152.1
+  },
+  {
+    "filename": "frame_0004.jpg",
+    "scene_zone": "Executive Lounge Sofa Area",
+    "frame_idx": 4,
+    "simulated_fov": 75.0,
+    "sharpness_score": 155.3
+  },
+  {
+    "filename": "frame_0005.jpg",
+    "scene_zone": "Boardroom Conference Table",
+    "frame_idx": 5,
+    "simulated_fov": 75.0,
+    "sharpness_score": 158.5
+  },
+  {
+    "filename": "frame_0006.jpg",
+    "scene_zone": "Conference 4K Display Screen",
+    "frame_idx": 6,
+    "simulated_fov": 75.0,
+    "sharpness_score": 161.7
+  },
+  {
+    "filename": "frame_0007.jpg",
+    "scene_zone": "North Hallway Portal",
+    "frame_idx": 7,
+    "simulated_fov": 75.0,
+    "sharpness_score": 164.9
+  },
+  {
+    "filename": "frame_0008.jpg",
+    "scene_zone": "Workstation Cluster A",
+    "frame_idx": 8,
+    "simulated_fov": 75.0,
+    "sharpness_score": 168.1
+  },
+  {
+    "filename": "frame_0009.jpg",
+    "scene_zone": "Engineering Desk Pods",
+    "frame_idx": 9,
+    "simulated_fov": 75.0,
+    "sharpness_score": 171.3
+  },
+  {
+    "filename": "frame_0010.jpg",
+    "scene_zone": "Pantry & Coffee Machine",
+    "frame_idx": 10,
+    "simulated_fov": 75.0,
+    "sharpness_score": 174.5
+  },
+  {
+    "filename": "frame_0011.jpg",
+    "scene_zone": "Kitchenette Dining Bar",
+    "frame_idx": 11,
+    "simulated_fov": 75.0,
+    "sharpness_score": 177.7
+  },
+  {
+    "filename": "frame_0012.jpg",
+    "scene_zone": "South Egress Corridor",
+    "frame_idx": 12,
+    "simulated_fov": 75.0,
+    "sharpness_score": 180.9
+  },
+  {
+    "filename": "frame_0013.jpg",
+    "scene_zone": "Emergency Exit Stairwell",
+    "frame_idx": 13,
+    "simulated_fov": 75.0,
+    "sharpness_score": 184.1
+  },
+  {
+    "filename": "frame_0014.jpg",
+    "scene_zone": "Indoor Ficus Plant Feature",
+    "frame_idx": 14,
+    "simulated_fov": 75.0,
+    "sharpness_score": 187.3
+  },
+  {
+    "filename": "frame_0015.jpg",
+    "scene_zone": "Floor Overview Central Hub",
+    "frame_idx": 15,
+    "simulated_fov": 75.0,
+    "sharpness_score": 190.5
+  }
+]
